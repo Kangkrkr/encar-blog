@@ -9,6 +9,7 @@ public class Member implements Serializable {
 	private String password;
 	private String email;
 	private String profilePic;
+	private String authName;
 
 	public Member() {}
 
@@ -50,6 +51,14 @@ public class Member implements Serializable {
 
 	public void setProfilePic(String profilePic) {
 		this.profilePic = profilePic;
+	}
+
+	public String getAuthName() {
+		return authName;
+	}
+
+	public void setAuthName(String authName) {
+		this.authName = authName;
 	}
 
 }
