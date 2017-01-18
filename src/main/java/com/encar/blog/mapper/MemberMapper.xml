@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.encar.blog.mapper.MemberMapper">
+
+	<!-- 
+	<resultMap type="Member" id="memberWithAuth">
+		<id property="memberId" column="member_id"/>
+		<result property="account" column="account"/>
+		<result property="email" column="email"/>
+		<result property="profilePic" column="profile_pic"/>
+		<result property="authName" column="auth_name"/>
+	</resultMap>
+	-->
+	
+	<select id="selectMember" resultType="integer">
+		SELECT COUNT(*) FROM MEMBER
+	</select>
+	
+	<!-- 
+	<select id="selectMemberWithAccountAndAuthName" parameterType="MemberAuth" resultMap="memberWithAuth">
+		SELECT 
+		    M.MEMBER_ID, 
+		    M.ACCOUNT, 
+		    M.EMAIL, 
+		    M.PROFILE_PIC, 
+		    A.AUTH_NAME AS AUTH_NAME
+		FROM MEMBER M
+		    INNER JOIN MEMBER_AUTH MA
+		    ON M.MEMBER_ID = MA.MA_MEMBER_ID
+		    INNER JOIN AUTH A
+		    ON MA.MA_AUTH_ID = A.AUTH_ID
+		WHERE M.ACCOUNT = #{account}
+			AND A.AUTH_NAME = #{authName}
+	</select>
+	-->
+</mapper>
