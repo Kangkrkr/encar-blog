@@ -4,9 +4,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.encar.blog.domain.Member;
+import com.encar.blog.domain.MemberAuth;
 import com.encar.blog.service.MemberService;
 
 @Controller
@@ -18,14 +21,10 @@ public class HomeController {
 	private MemberService memberService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home() {
+	public String home(Model model) {
 		
-		//Member member = template.selectOne("member.selectMemberWithAccountAndAuthName", new MemberAuth("kangkrkr", "ADMIN"));
-		
-//		if(member == null){
-//			logger.error("member 객체가 null 입니다.");
-//		}
-		logger.info(".." + memberService.selectMember());
+		Member member = memberService.selectMemberWithAccountAndAuthName(new MemberAuth("kangkrkr", "ADMIN"));
+		model.addAttribute("member", member);
 		
 		return "home";
 	}
