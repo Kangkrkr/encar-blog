@@ -13,9 +13,9 @@ import com.encar.blog.domain.MemberAuth;
 import com.encar.blog.service.MemberService;
 
 @Controller
-public class HomeController {
+public class MainController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 	
 	@Autowired
 	private MemberService memberService;
@@ -29,4 +29,13 @@ public class HomeController {
 		return "home";
 	}
 	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login() {
+		return "login/login";
+	}
+	
+	@RequestMapping(value = "/login2", method = RequestMethod.GET)
+	public String login2() {
+		return "login/login2";
+	}
 }
