@@ -45,7 +45,7 @@
 					<h5 class="header col s12 light">엔카 블로그에서 다양한 차량을 만나보세요!</h5>
 				</div>
 				<div class="row center">
-					<a href="/blog/login" class="col s4 offset-s4 waves-effect waves-light red lighten-1 btn login-btn"><i class="material-icons left">vpn_key</i>LOGIN</a>
+					<a href="/blog/login" class="col s4 offset-s4 waves-effect waves-light red lighten-1 btn login-btn"><i class="material-icons left">vpn_key</i>로그인</a>
 				</div>
 				<br>
 				<br>
