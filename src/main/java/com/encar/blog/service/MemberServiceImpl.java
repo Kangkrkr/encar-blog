@@ -7,11 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.encar.blog.domain.Auth;
 import com.encar.blog.domain.Member;
-import com.encar.blog.domain.MemberAuth;
 
-@Transactional
 @Service
+@Transactional
 public class MemberServiceImpl implements MemberService {
 
 	@Autowired
@@ -21,12 +21,29 @@ public class MemberServiceImpl implements MemberService {
 	@Transactional(readOnly=true)
 	@Override
 	public List<Member> selectMember() {
-		return (List<Member>) template.selectList("member.selectMember");
+		return template.selectList("member.selectMember");
 	}
 
 	@Transactional(readOnly=true)
 	@Override
-	public Member selectMemberWithAccountAndAuthName(MemberAuth ma) {
-		return (Member) template.selectOne("member.selectMemberWithAccountAndAuthName", ma);
+	public Member selectMemberWithAccount(String account) {
+		return template.selectOne("member.selectMemberWithAccount", account);
 	}
+
+	@Transactional(readOnly=true)
+	@Override
+	public Member selectMemberWithAccount2() {
+		return template.selectOne("member.selectMemberWithAccount2");
+	}
+
+	@Override
+	public List<Auth> selectAuthListByMemberId(Integer memberId) {
+		if(template == null){
+			System.err.println("template가 null임.");
+		}else{
+			System.err.println("template가 null은 아님.");
+		}
+		return template.selectList("member.selectAuthListByMemberId", memberId);
+	}
+
 }

@@ -1,6 +1,8 @@
 package com.encar.blog.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Member implements Serializable {
 
@@ -9,7 +11,7 @@ public class Member implements Serializable {
 	private String password;
 	private String email;
 	private String profilePic;
-	private String authName;
+	private List<Auth> auths = new ArrayList<>();
 
 	public Member() {}
 
@@ -53,12 +55,12 @@ public class Member implements Serializable {
 		this.profilePic = profilePic;
 	}
 
-	public String getAuthName() {
-		return authName;
+	public List<Auth> getAuths() {
+		return auths;
 	}
 
-	public void setAuthName(String authName) {
-		this.authName = authName;
+	public void setAuths(List<Auth> auths) {
+		this.auths = auths;
 	}
-
+	
 }

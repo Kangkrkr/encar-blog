@@ -1,8 +1,8 @@
 package com.encar.blog.domain;
 
-import java.io.Serializable;
+//import org.springframework.security.core.GrantedAuthority;
 
-public class Auth implements Serializable {
+public class Auth {
 	
 	private Long authId;
 	private String authName;
