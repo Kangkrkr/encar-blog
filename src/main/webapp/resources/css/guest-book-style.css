@@ -1,0 +1,82 @@
+body {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+
+nav ul a, nav .brand-logo {
+	color: #444;
+}
+
+p {
+	line-height: 2rem;
+}
+
+.button-collapse {
+	color: #26a69a;
+}
+
+.parallax-container {
+	min-height: 260px;
+	line-height: 0;
+	height: auto;
+	color: rgba(255, 255, 255, .9);
+	/* padding-top: 70px; */
+}
+
+.parallax-container .section {
+	width: 100%;
+}
+
+@media only screen and (max-width : 992px) {
+	.parallax-container .section {
+		position: absolute;
+		top: 40%;
+	}
+	#index-banner .section {
+		top: 10%;
+	}
+}
+
+@media only screen and (max-width : 600px) {
+	#index-banner .section {
+		top: 0;
+	}
+}
+
+.icon-block {
+	padding: 0 15px;
+}
+
+.icon-block .material-icons {
+	font-size: inherit;
+}
+
+.row.container {
+	margin-top : 40px;
+}
+
+.col.s2.img-container {
+	margin-left: -5px;
+	width: 125px;
+}
+
+li.collection-item div img {
+	width: 100px;
+	hegiht: 100px;
+	border-radius: 120px;
+	
+}
+
+h5.title {
+	padding-left: 15px;
+}
+
+p.content {
+	padding-left: 15px;
+}
+
+footer.page-footer {
+	margin-top: 40px;
+	min-height: 270px;
+}
