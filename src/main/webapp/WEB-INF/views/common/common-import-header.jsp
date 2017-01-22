@@ -10,14 +10,14 @@
 			<ul class="right hide-on-med-and-down">
 				<li><a href="/blog">홈</a></li>
 				<li><a href="/blog/posting">포스팅</a></li>
-				<li><a href="#">방명록</a></li>
+				<li><a href="/blog/guest-book">방명록</a></li>
 				<li><a href="#">문의</a></li>
 			</ul>
 	
 			<ul id="nav-mobile" class="side-nav">
 				<li><a href="/blog">홈</a></li>
 				<li><a href="/blog/posting">포스팅</a></li>
-				<li><a href="#">방명록</a></li>
+				<li><a href="/blog/guest-book">방명록</a></li>
 				<li><a href="#">문의</a></li>
 			</ul>
 			<a href="#" data-activates="nav-mobile" class="button-collapse">
