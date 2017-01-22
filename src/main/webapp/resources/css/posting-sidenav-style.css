@@ -1,0 +1,9 @@
+@CHARSET "UTF-8";
+
+.posting.side-nav {
+	padding-top: 50px;
+}
+
+.posting.side-nav > li {
+	opacity: 0.8;
+}
