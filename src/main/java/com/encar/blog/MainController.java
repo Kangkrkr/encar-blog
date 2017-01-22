@@ -23,7 +23,7 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = "/posting", method = RequestMethod.GET)
-	public String login2() {
+	public String posting() {
 		return "posting/posting";
 	}
 }
