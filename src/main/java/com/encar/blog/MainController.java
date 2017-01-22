@@ -26,4 +26,9 @@ public class MainController {
 	public String posting() {
 		return "posting/posting";
 	}
+	
+	@RequestMapping(value = "/guest-book", method = RequestMethod.GET)
+	public String guestBook() {
+		return "guest-book/guest-book";
+	}
 }
