@@ -1,6 +1,7 @@
-package com.encar.blog;
+package com.encar.blog.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,8 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.encar.blog.domain.Member;
-import com.encar.blog.service.MemberService;
+import com.encar.blog.domain.CmMap;
+import com.encar.blog.mapper.MemberMapper;
 
 @Controller
 public class MainController {
@@ -18,19 +19,20 @@ public class MainController {
 	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 	
 	@Autowired
-	private MemberService memberService;
+	private MemberMapper memberMapper;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
-		if(memberService == null) {
-			System.err.println("memberSerivice 가 또 null");
-		}else {
-			System.err.println("memberSerivice 가 또 null은 아니구려");
+		
+		List<CmMap> members = memberMapper.selectMember();
+		logger.info("member size : " + members.size());
+		for(CmMap m : members) {
+			Set<String> keySet =  m.keySet();
+			for(String key : keySet)
+				logger.info("key : " + key +" --- value : " + m.get(key));
 		}
 		
-		List<Member> members = memberService.selectMember();
-		for(Member m : members)
-			System.err.println(m.getAccount());
+		logger.info("----------------------------------------------------------");
 		
 		return "home";
 	}

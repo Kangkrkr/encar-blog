@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="member">
+<mapper namespace="com.encar.blog.mapper.MemberMapper">
 
+	<!-- 
 	<resultMap type="Member" id="memberWithAuths">
 		<id property="memberId" column="member_id"/>
 		<result property="account" column="account"/>
@@ -21,22 +22,22 @@
 		<result property="email" column="email"/>
 		<result property="profilePic" column="profile_pic"/>
 	</resultMap>
+	-->	
 	
-	<select id="selectMember" resultType="Member">
+	<select id="selectMemberByAccount" parameterType="java.lang.String" resultType="Member">
+		SELECT * FROM MEMBER WHERE ACCOUNT = #{account}
+	</select>
+	 
+	<select id="selectMember" resultType="CmMap">
 		SELECT * FROM MEMBER
 	</select>
 	
-	<!-- resultMap="memberWithAuths" -->
-	<select id="selectMemberWithAccount" parameterType="java.lang.String" resultMap="member">
-		SELECT * FROM MEMBER WHERE ACCOUNT = #{account}
-	</select>
+	<resultMap type="Auth" id="authMap">
+		<result property="authority" column="AUTH_NAME"/>
+	</resultMap>
 	
-	<select id="selectMemberWithAccount2" resultType="Member">
-		SELECT * FROM MEMBER WHERE ACCOUNT = 'kangkrkr'
-	</select>
-	
-	<select id="selectAuthListByMemberId" parameterType="java.lang.Integer" resultType="Auth">
-		SELECT A.AUTH_ID, A.AUTH_NAME 
+	<select id="selectAuthListByMemberId" parameterType="java.lang.Long" resultMap="authMap">
+		SELECT A.AUTH_NAME
 		FROM AUTH A
 		WHERE A.AUTH_ID
 		IN (

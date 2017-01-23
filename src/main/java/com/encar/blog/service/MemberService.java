@@ -2,17 +2,40 @@ package com.encar.blog.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.encar.blog.domain.Auth;
+import com.encar.blog.domain.CmMap;
 import com.encar.blog.domain.Member;
+import com.encar.blog.mapper.MemberMapper;
 
+@Transactional
+public class MemberService implements MemberMapper {
 
-public interface MemberService {
+	private static Logger logger = LoggerFactory.getLogger(MemberService.class);
 	
-	public List<Member> selectMember();
+	@Autowired
+	private MemberMapper memberMapper;
 	
-	public Member selectMemberWithAccount(String account);
+	@Transactional(readOnly=true)
+	@Override
+	public List<CmMap> selectMember() {
+		return memberMapper.selectMember();
+	}
 	
-	public Member selectMemberWithAccount2();
-	
-	public List<Auth> selectAuthListByMemberId(Integer memberId);
+	@Transactional(readOnly=true)
+	@Override
+	public Member selectMemberByAccount(String account) {
+		return memberMapper.selectMemberByAccount(account);
+	}
+
+	@Transactional(readOnly=true)
+	@Override
+	public List<Auth> selectAuthListByMemberId(Long memberId) {
+		return memberMapper.selectAuthListByMemberId(memberId);
+	}
+
 }
