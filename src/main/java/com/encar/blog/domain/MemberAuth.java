@@ -1,6 +1,8 @@
 package com.encar.blog.domain;
 
-public class MemberAuth {
+import java.io.Serializable;
+
+public class MemberAuth implements Serializable {
 
 	private String account;
 	private String authName;

@@ -14,9 +14,11 @@
 	<!-- @EnableWebMvc과 같은 설정. -->
 	<!-- 참조 : http://peyton.tk/index.php/post/889 -->
 	<mvc:annotation-driven>
+		<!--
 		<mvc:message-converters>
 			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
 		</mvc:message-converters>
+		 -->
 	</mvc:annotation-driven>
 
 	<!-- 프로젝트의 resources 디렉토리 내 정적 리소스들을 효율적으로 제공하기 위해 HTTP GET 요청을 관리한다. -->

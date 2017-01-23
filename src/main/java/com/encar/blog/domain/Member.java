@@ -11,7 +11,7 @@ public class Member implements Serializable {
 	private String password;
 	private String email;
 	private String profilePic;
-	private List<Auth> auths = new ArrayList<>();
+	private List<Auth> authories = new ArrayList<>();
 
 	public Member() {}
 
@@ -55,12 +55,12 @@ public class Member implements Serializable {
 		this.profilePic = profilePic;
 	}
 
-	public List<Auth> getAuths() {
-		return auths;
+	public List<Auth> getAuthories() {
+		return authories;
 	}
 
-	public void setAuths(List<Auth> auths) {
-		this.auths = auths;
+	public void setAuthories(List<Auth> authories) {
+		this.authories = authories;
 	}
 	
 }
