@@ -21,13 +21,8 @@ public class LoginUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String account) throws UsernameNotFoundException {
 		Member member = memberMapper.selectMemberByAccount(account);
+		
 		return new LoginUserDetails(member);
 	}
-
-	/*
-	public void setMemberService(MemberMapper memberMapper) {
-		this.memberMapper = memberMapper;
-	}
-	*/
 
 }

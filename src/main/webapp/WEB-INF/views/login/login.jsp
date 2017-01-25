@@ -18,11 +18,11 @@
 	<center>
 		<div class="section"></div>
 		<div class="section"></div>
+		<div class="section"></div>
 
-		<div class="row">
+		<div class="row login-container">
 			<div class="col s6 offset-s3">
-				<div class="z-depth-4 grey lighten-4 row"
-					style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+				<div class="z-depth-5 grey lighten-4 row" style="display: inline-block; padding: 32px 80px 30px 80px; border: 1px solid #EEE;">
 					<h3 class="red-text text-darken1">엔카 블로그</h3>
 					<form class="col s12" action="/blog/login-process" method="post">
 						<div class='row'>
@@ -47,13 +47,13 @@
 						<br />
 						<center>
 							<div class='row'>
-								<button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect red darken-1'>로그인</button>
+								<button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect red darken-1 z-depth-3'>로그인</button>
 							</div>
 							<div class='row'>
-								<button type='submit' name='btn_join' class='col s12 btn btn-large waves-effect red darken-1'>회원가입</button>
+								<a id="btn_join" href="/blog/join" name='btn_join' class='col s12 btn btn-large waves-effect red darken-1 z-depth-3'>회원가입</a>
 							</div>
 							<div class='row'>
-								<a id="btn_home" href="/blog" name='btn_home' class='col s12 btn btn-large waves-effect red darken-1'>홈으로</a>
+								<a id="btn_home" href="/blog" name='btn_home' class='col s12 btn btn-large waves-effect red darken-1 z-depth-3'>홈으로</a>
 							</div>
 						</center>
 					</form>
@@ -65,5 +65,11 @@
 	<div class="section"></div>
 	<div class="section"></div>
 	</main>
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('.login-container').fadeTo(800, 1.0);
+		});
+	</script>
 </body>
 </html>
