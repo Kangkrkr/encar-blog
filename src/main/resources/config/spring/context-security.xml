@@ -9,10 +9,14 @@
 	<bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 	
 	<bean id="memberService" class="com.encar.blog.service.MemberService"/>
-	
 	<bean id="loginUserDetailsService" class="com.encar.blog.security.LoginUserDetailsService"/>
+	<bean id="securityPrincipalProvider" class="com.encar.blog.security.SecurityPrincipalProvider"/>
 	
 	<bean id="loginSuccessHandler" class="com.encar.blog.handler.LoginSuccessHandler">
+		<property name="memberMapper" ref="memberService"/>
+	</bean>
+	
+	<bean id="logoutSuccessHandler" class="com.encar.blog.handler.LogoutSuccessHandler">
 		<property name="memberMapper" ref="memberService"/>
 	</bean>
 	
@@ -33,7 +37,15 @@
 			username-parameter="account"
 			password-parameter="password"
 			default-target-url="/"
-			authentication-success-handler-ref="loginSuccessHandler"/>
+			authentication-success-handler-ref="loginSuccessHandler"
+		/>
+		
+		<security:logout
+			logout-url="/logout"
+			invalidate-session="true"
+			success-handler-ref="logoutSuccessHandler";
+		/>
+		
 		<security:http-basic/>
 	</security:http>
 

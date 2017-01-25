@@ -34,9 +34,8 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		
 		Member member = memberMapper.selectMemberByAccount(req.getParameter("account"));
 		List<Auth> authories = memberMapper.selectAuthListByMemberId(member.getMemberId());
+		logger.info("authories : " + authories);
 		// 사용자 권한 임시 추가 (곧 제거될 코드임)
-		Auth tempAuth = new Auth(new Long(1), "ADMIN");
-		authories.add(tempAuth);
 		
 		member.setAuthories(authories);
 		

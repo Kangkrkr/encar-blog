@@ -1,43 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.encar.blog.mapper.MemberMapper">
-
-	<!-- 
-	<resultMap type="Member" id="memberWithAuths">
-		<id property="memberId" column="member_id"/>
-		<result property="account" column="account"/>
-		<result property="email" column="email"/>
-		<result property="profilePic" column="profile_pic"/>
-		<collection property="auths"
-					column="member_id" 
+	
+	<resultMap type="Member" id="memberWithAuthsMap">
+		<id property="memberId" column="MEMBER_ID"/>
+		<result property="account" column="ACCOUNT"/>
+		<result property="password" column="PASSWORD"/>
+		<result property="email" column="EMAIL"/>
+		<result property="profilePic" column="PROFILE_PIC"/>
+		<collection property="authories"
+					column="MEMBER_ID" 
 					javaType="java.util.ArrayList" 
 					ofType="Auth" 
 					select="selectAuthListByMemberId">
 		</collection>
 	</resultMap>
-	
-	<resultMap type="Member" id="member">
-		<id property="memberId" column="member_id"/>
-		<result property="account" column="account"/>
-		<result property="email" column="email"/>
-		<result property="profilePic" column="profile_pic"/>
-	</resultMap>
-	-->	
-	
-	<select id="selectMemberByAccount" parameterType="java.lang.String" resultType="Member">
-		SELECT * FROM MEMBER WHERE ACCOUNT = #{account}
-	</select>
 	 
-	<select id="selectMember" resultType="CmMap">
+	<select id="selectMember" resultMap="memberWithAuthsMap">
 		SELECT * FROM MEMBER
 	</select>
 	
+	<select id="selectMemberByAccount" parameterType="java.lang.String" resultMap="memberWithAuthsMap">
+		SELECT * FROM MEMBER WHERE ACCOUNT = #{account}
+	</select>
+	
 	<resultMap type="Auth" id="authMap">
+		<id property="authId" column="AUTH_ID"/>
 		<result property="authority" column="AUTH_NAME"/>
 	</resultMap>
 	
 	<select id="selectAuthListByMemberId" parameterType="java.lang.Long" resultMap="authMap">
-		SELECT A.AUTH_NAME
+		SELECT *
 		FROM AUTH A
 		WHERE A.AUTH_ID
 		IN (
@@ -46,4 +39,27 @@
 		 	WHERE MA.MA_MEMBER_ID = #{memberId}
 		)
 	</select>
+	
+	<insert id="insertMember" parameterType="Member">
+		INSERT INTO MEMBER(MEMBER_ID, ACCOUNT, PASSWORD, EMAIL, PROFILE_PIC)
+		VALUES (
+			MEMBER_SEQ.NEXTVAL,
+			#{account},
+			#{password},
+			#{email},
+			#{profilePic}
+		)
+		
+		<selectKey keyProperty="memberId" resultType="long" order="AFTER">
+			SELECT MEMBER_SEQ.CURRVAL FROM DUAL
+		</selectKey>
+	</insert>
+	
+	<insert id="insertMemberAuth" parameterType="CmMap">
+		INSERT INTO MEMBER_AUTH
+		VALUES (
+			#{memberId},
+			#{authId}
+		)
+	</insert>
 </mapper>

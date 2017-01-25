@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,22 +12,40 @@
 <body>
 	<!-- nav header -->
 	<c:import url="common/common-import-header.jsp"/>
+	
+	<!-- 인증받은 유저 -->
+	<sec:authentication var="user" property="principal"/>
 
 	<div id="index-banner" class="parallax-container">
 		<div class="section no-pad-bot">
-			<div class="container">
+			<div class="container main-page-container">
 				<br>
 				<br>
 				<h1 class="header center grey-text text-lighten-2">엔카 블로그에 오신것을 환영합니다.</h1>
+				
+				<sec:authorize access="isAuthenticated()">
+					<div class="row center">
+						<h5 class="header col s12 light">- 환영합니다 <span><b>${user.account}</b></span> 님 -</h5>
+					</div>
+				</sec:authorize>
+				
 				<div class="row center">
 					<h5 class="header col s12 light">엔카 블로그에서 다양한 차량을 만나보세요!</h5>
 				</div>
-				<div class="row center">
-					<a href="/blog/login" class="col s4 offset-s4 waves-effect waves-light red lighten-1 btn login-btn"><i class="material-icons left">vpn_key</i>로그인</a>
+				<div class="row center sign-btn-container">
+					<sec:authorize access="isAnonymous()">
+						<a href="/blog/login" class="col s4 offset-s4 waves-effect waves-light red lighten-1 btn login-btn z-depth-5">
+							<i class="material-icons left">vpn_key</i>로그인
+						</a>
+					</sec:authorize>
+					<sec:authorize access="isAuthenticated()">
+						<a class="col s4 offset-s4 waves-effect waves-light red lighten-1 btn logout-btn z-depth-5">
+							<i class="material-icons left">power_settings_new</i>로그아웃
+						</a>
+					</sec:authorize>
 				</div>
 				<br>
 				<br>
-
 			</div>
 		</div>
 		<div class="parallax">
@@ -34,7 +53,7 @@
 		</div>
 	</div>
 
-	<div class="container">
+	<div class="container recent-posting-container">
 		<div class="section">
 			<div class="row center recent-posting-title">
 				<h3 class="header col s12 black-text text-lighten-2">최근 포스팅</h3>
@@ -110,7 +129,7 @@
 	
 	<div class="col s10 offset-s1 divider"></div>
 	
-	<div class="container">
+	<div class="container notification-container">
 		<div class="section">
 			<div class="row center notification-title">
 				<h3 class="header col s12 black-text text-lighten-2">공지사항</h3>
@@ -157,5 +176,33 @@
 	<!-- footer -->
 	<c:import url="common/common-import-footer.jsp"/>
 	
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('.main-page-container').fadeTo(1200, 1.0, function(){
+				/*
+				$('.sign-btn-container').slideDown(300, function(){
+					$('.recent-posting-container').slideDown(900, function(){
+						$('.notification-container').slideDown(900);
+					});
+				});
+				*/
+			});
+			
+			$('.logout-btn').click(function(){
+				$.ajax({
+					url : '/blog/logout',
+					type : 'GET',
+					success : function(result){
+						alert("로그아웃에 성공하였습니다.");
+						location.href='/blog';
+					},
+					error : function(error){
+						alert("로그아웃에 실패하였습니다. 관리자에게 문의하세요.");
+						// 추가 처리 코드..
+					}				
+				});
+			});
+		});
+	</script>
 </body>
 </html>
