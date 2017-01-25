@@ -1,32 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="member">
+<mapper namespace="com.encar.blog.mapper.MemberMapper">
 
-	<resultMap type="Member" id="memberWithAuth">
+	<!-- 
+	<resultMap type="Member" id="memberWithAuths">
 		<id property="memberId" column="member_id"/>
 		<result property="account" column="account"/>
 		<result property="email" column="email"/>
 		<result property="profilePic" column="profile_pic"/>
-		<result property="authName" column="auth_name"/>
+		<collection property="auths"
+					column="member_id" 
+					javaType="java.util.ArrayList" 
+					ofType="Auth" 
+					select="selectAuthListByMemberId">
+		</collection>
 	</resultMap>
 	
-	<select id="selectMember"  resultType="Member" >
+	<resultMap type="Member" id="member">
+		<id property="memberId" column="member_id"/>
+		<result property="account" column="account"/>
+		<result property="email" column="email"/>
+		<result property="profilePic" column="profile_pic"/>
+	</resultMap>
+	-->	
+	
+	<select id="selectMemberByAccount" parameterType="java.lang.String" resultType="Member">
+		SELECT * FROM MEMBER WHERE ACCOUNT = #{account}
+	</select>
+	 
+	<select id="selectMember" resultType="CmMap">
 		SELECT * FROM MEMBER
 	</select>
 	
-	<select id="selectMemberWithAccountAndAuthName" parameterType="MemberAuth" resultMap="memberWithAuth">
-		SELECT 
-		    M.MEMBER_ID, 
-		    M.ACCOUNT, 
-		    M.EMAIL, 
-		    M.PROFILE_PIC, 
-		    A.AUTH_NAME AS AUTH_NAME
-		FROM MEMBER M
-		    INNER JOIN MEMBER_AUTH MA
-		    ON M.MEMBER_ID = MA.MA_MEMBER_ID
-		    INNER JOIN AUTH A
-		    ON MA.MA_AUTH_ID = A.AUTH_ID
-		WHERE M.ACCOUNT = #{account}
-			AND A.AUTH_NAME = #{authName}
+	<resultMap type="Auth" id="authMap">
+		<result property="authority" column="AUTH_NAME"/>
+	</resultMap>
+	
+	<select id="selectAuthListByMemberId" parameterType="java.lang.Long" resultMap="authMap">
+		SELECT A.AUTH_NAME
+		FROM AUTH A
+		WHERE A.AUTH_ID
+		IN (
+			SELECT MA.MA_AUTH_ID
+		 	FROM MEMBER_AUTH MA
+		 	WHERE MA.MA_MEMBER_ID = #{memberId}
+		)
 	</select>
 </mapper>

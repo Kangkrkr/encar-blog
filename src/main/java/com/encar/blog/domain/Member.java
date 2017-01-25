@@ -1,15 +1,22 @@
 package com.encar.blog.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties({"handler"})
 public class Member implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private Long memberId;
 	private String account;
 	private String password;
 	private String email;
 	private String profilePic;
-	private String authName;
+	private List<Auth> authories = new ArrayList<>();
 
 	public Member() {}
 
@@ -53,12 +60,19 @@ public class Member implements Serializable {
 		this.profilePic = profilePic;
 	}
 
-	public String getAuthName() {
-		return authName;
+	public List<Auth> getAuthories() {
+		return authories;
 	}
 
-	public void setAuthName(String authName) {
-		this.authName = authName;
+	public void setAuthories(List<Auth> authories) {
+		this.authories = authories;
 	}
 
+	@Override
+	public String toString() {
+		return "Member [memberId=" + memberId + ", account=" + account
+				+ ", password=" + password + ", email=" + email
+				+ ", profilePic=" + profilePic + ", authories=" + authories
+				+ "]";
+	}
 }

@@ -2,16 +2,21 @@ package com.encar.blog.domain;
 
 import java.io.Serializable;
 
-public class Auth implements Serializable {
+import org.springframework.security.core.GrantedAuthority;
+
+
+public class Auth implements Serializable, GrantedAuthority {
+	
+	private static final long serialVersionUID = 1L;
 	
 	private Long authId;
-	private String authName;
+	private String authority;
 	
 	public Auth(){}
 	
-	public Auth(Long authId, String authName) {
+	public Auth(Long authId, String authority) {
 		this.authId = authId;
-		this.authName = authName;
+		this.authority = authority;
 	}
 
 	public Long getAuthId() {
@@ -21,13 +26,14 @@ public class Auth implements Serializable {
 	public void setAuthId(Long authId) {
 		this.authId = authId;
 	}
-
-	public String getAuthName() {
-		return authName;
+	
+	public void setAuthority(String authority) {
+		this.authority = authority;
 	}
 
-	public void setAuthName(String authName) {
-		this.authName = authName;
+	@Override
+	public String getAuthority() {
+		return this.authority;
 	}
 	
 }

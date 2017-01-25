@@ -4,17 +4,13 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
 	xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd
-        http://www.springframework.org/schema/jdbc
-        http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
-        http://www.springframework.org/schema/tx
-        http://www.springframework.org/schema/tx/spring-tx.xsd">
-                        
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
 	<!-- Oracle DataSource -->
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
 		<property name="username" value="encar_test"/>
@@ -26,19 +22,23 @@
 		<property name="dataSource" ref="dataSource"/>
 		<property name="typeAliasesPackage" value="com.encar.blog.domain"/>
 		<property name="mapperLocations" value="classpath*:/mapper/*/*.xml"/>
-		<!-- <property name="configLocation" value="classpath:/mapper/sql-map-config.xml"/>  -->
+		<property name="configLocation" value="classpath:/mapper/sql-map-config.xml"/>
 	</bean>
 
-	<!-- mapper xml 을 스캔할 베이스 패키지를 지정한다.
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.encar.blog.mapper"/>
 	</bean>
-	-->
 
 	<!-- SqlSessionTemplate -->
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory"/>
 	</bean>
+	
+	<!-- Service Mapping
+	<bean id="memberService" class="com.encar.blog.service.MemberServiceImpl">
+		<property name="sqlSession" ref="sqlSession"/>
+	</bean>
+	-->
 
 	<!-- Transaction Manager -->
 	<bean id="transactionManager"
@@ -47,5 +47,5 @@
 	</bean>
 	
 	<!-- 어노테이션 기반 Transaction Enable -->
-	<tx:annotation-driven/>
+	<tx:annotation-driven transaction-manager="transactionManager"/>
 </beans>

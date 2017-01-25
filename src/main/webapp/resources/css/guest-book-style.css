@@ -1,10 +1,9 @@
-/* Custom Stylesheet */
-/**
- * Use this file to override Materialize files so you can update
- * the core Materialize files in the future
- *
- * Made By MaterializeCSS.com
- */
+body {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+
 nav ul a, nav .brand-logo {
 	color: #444;
 }
@@ -17,28 +16,16 @@ p {
 	color: #26a69a;
 }
 
-.login-btn {
-	margin-top : 40px;
-	text-align: center;
-}
-
 .parallax-container {
-	min-height: 330px;
+	min-height: 260px;
 	line-height: 0;
 	height: auto;
 	color: rgba(255, 255, 255, .9);
+	/* padding-top: 70px; */
 }
 
 .parallax-container .section {
 	width: 100%;
-}
-
-.recent-posting-title {
-	margin-top : 20px;
-}
-
-.notification-title {
-	margin-top : 5px;
 }
 
 @media only screen and (max-width : 992px) {
@@ -57,10 +44,6 @@ p {
 	}
 }
 
-.posting-section, .notification-section {
-	margin-top: -30px;
-}
-
 .icon-block {
 	padding: 0 15px;
 }
@@ -69,6 +52,31 @@ p {
 	font-size: inherit;
 }
 
+.row.container {
+	margin-top : 40px;
+}
+
+.col.s2.img-container {
+	margin-left: -5px;
+	width: 125px;
+}
+
+li.collection-item div img {
+	width: 100px;
+	hegiht: 100px;
+	border-radius: 120px;
+	
+}
+
+h5.title {
+	padding-left: 15px;
+}
+
+p.content {
+	padding-left: 15px;
+}
+
 footer.page-footer {
-	margin: 0;
+	margin-top: 40px;
+	min-height: 270px;
 }
