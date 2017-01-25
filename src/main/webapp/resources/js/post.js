@@ -110,13 +110,14 @@ function uploadFile() {
 	var formData = new FormData(form);
 
 	$.ajax({
-		url : '/rest/post/upload',
+		url : '/blog/posting/upload',
 		type : 'POST',
 		processData : false,
 		contentType : false,
 		data : formData,
 		success : function(result) {
-			location.reload(true);
+			//location.reload(true);
+			alert(result);
 		},
 		error : function(error) {
 			Materialize.toast(error.responseJSON, 1000);
