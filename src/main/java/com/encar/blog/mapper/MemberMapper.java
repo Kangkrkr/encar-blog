@@ -8,11 +8,13 @@ import com.encar.blog.domain.Member;
 
 public interface MemberMapper {
 	
-	public List<CmMap> selectMember();
+	public List<Member> selectMember();
 	
 	public Member selectMemberByAccount(String account);
 	
-	//public Member selectMemberWithAccount2();
-	
 	public List<Auth> selectAuthListByMemberId(Long memberId);
+	
+	public void insertMember(Member member);
+	
+	public void insertMemberAuth(CmMap params);
 }

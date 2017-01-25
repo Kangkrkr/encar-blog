@@ -36,6 +36,16 @@ p {
 	line-height: 2rem;
 }
 
+.main-page-container {
+	opacity : 0;
+}
+
+/*
+.sign-btn-container, .recent-posting-container, .notification-container {
+	display: none;
+}
+*/
+
 .button-collapse {
 	color: #26a69a;
 }
