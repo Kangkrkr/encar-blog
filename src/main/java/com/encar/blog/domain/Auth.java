@@ -35,5 +35,10 @@ public class Auth implements Serializable, GrantedAuthority {
 	public String getAuthority() {
 		return this.authority;
 	}
+
+	@Override
+	public String toString() {
+		return "Auth [authority=" + authority + "]";
+	}
 	
 }
