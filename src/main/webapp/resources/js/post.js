@@ -96,9 +96,9 @@ function getThumbnailPrivew(html) {
 		reader.onload = function(e) {
 			$($preview).css('display', '');
 			$($preview).append(
-					'<img class="col s10 offset-s1 m6 offset-m3 l6 offset-l3 image-preview" src="'
+					'<img class="col s4 offset-s3 m4 offset-m4 l4 offset-l4 image-preview" src="'
 							+ e.target.result
-							+ '" border="0" height="235" alt="" />');
+							+ '" border="0" width="235" height="235" alt="" />');
 			$('.item-container').append($preview);
 		}
 		reader.readAsDataURL(html.files[0]);
