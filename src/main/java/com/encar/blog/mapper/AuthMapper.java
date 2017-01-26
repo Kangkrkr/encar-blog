@@ -1,9 +1,9 @@
 package com.encar.blog.mapper;
 
-import com.encar.blog.domain.Auth;
+import com.encar.blog.domain.CmMap;
 
 public interface AuthMapper {
 	
-	public Auth selectAuthByAuthName(String authority);
+	public CmMap selectAuthByAuthName(String authority);
 	
 }

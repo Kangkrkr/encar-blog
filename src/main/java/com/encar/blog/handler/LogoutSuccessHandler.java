@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
 
-import com.encar.blog.domain.Member;
+import com.encar.blog.domain.CmMap;
 
 public class LogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {
 
@@ -25,11 +25,12 @@ public class LogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {
 		response.setCharacterEncoding("UTF-8");
 		
 		try {
-			Member authenticatedMember = (Member)authentication.getPrincipal();
-			logger.info("사용자 " + authenticatedMember.getAccount() +" 가 로그아웃을 시도합니다.");
+			CmMap authenticatedMember = (CmMap)authentication.getPrincipal();
+			logger.info("사용자 " + authenticatedMember.getString("account") +" 가 로그아웃을 시도합니다.");
 			
 			super.onLogoutSuccess(request, response, authentication);
 		} catch(Exception e) {
+			e.printStackTrace();
 			logger.error("로그아웃에 실패하였습니다.");
 			
 			response.getOutputStream().write("로그아웃에 실패하였습니다.".getBytes("UTF-8"));

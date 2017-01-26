@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.encar.blog.mapper.MemberMapper">
 	
-	<resultMap type="Member" id="memberWithAuthsMap">
+	<!-- 여기 수정 -->
+	<resultMap type="CmMap" id="memberWithAuthsMap">
 		<id property="memberId" column="MEMBER_ID"/>
 		<result property="account" column="ACCOUNT"/>
 		<result property="password" column="PASSWORD"/>
@@ -11,14 +12,10 @@
 		<collection property="authories"
 					column="MEMBER_ID" 
 					javaType="java.util.ArrayList" 
-					ofType="Auth" 
+					ofType="CmMap"
 					select="selectAuthListByMemberId">
 		</collection>
 	</resultMap>
-	 
-	<select id="selectMember" resultMap="memberWithAuthsMap">
-		SELECT * FROM MEMBER
-	</select>
 	
 	<select id="selectMemberByAccount" parameterType="java.lang.String" resultMap="memberWithAuthsMap">
 		SELECT 
@@ -31,13 +28,9 @@
 		WHERE ACCOUNT = #{account}
 	</select>
 	
-	<resultMap type="Auth" id="authMap">
-		<id property="authId" column="AUTH_ID"/>
-		<result property="authority" column="AUTH_NAME"/>
-	</resultMap>
-	
-	<select id="selectAuthListByMemberId" parameterType="java.lang.Long" resultMap="authMap">
-		SELECT *
+	<select id="selectAuthListByMemberId" parameterType="java.lang.Long" resultType="CmMap">
+		SELECT 
+			A.AUTH_NAME
 		FROM AUTH A
 		WHERE A.AUTH_ID
 		IN (
@@ -47,7 +40,7 @@
 		)
 	</select>
 	
-	<insert id="insertMember" parameterType="Member">
+	<insert id="insertMember" parameterType="CmMap">
 		INSERT INTO MEMBER(MEMBER_ID, ACCOUNT, PASSWORD, EMAIL, PROFILE_PIC)
 		VALUES (
 			MEMBER_SEQ.NEXTVAL,

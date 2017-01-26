@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.encar.blog.domain.Member;
+import com.encar.blog.domain.CmMap;
 import com.encar.blog.mapper.MemberMapper;
 
 @Service
@@ -20,7 +20,7 @@ public class LoginUserDetailsService implements UserDetailsService {
 	@Transactional(readOnly=true)
 	@Override
 	public UserDetails loadUserByUsername(String account) throws UsernameNotFoundException {
-		Member member = memberMapper.selectMemberByAccount(account);
+		CmMap member = memberMapper.selectMemberByAccount(account);
 		
 		return new LoginUserDetails(member);
 	}
