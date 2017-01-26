@@ -143,8 +143,7 @@
 							<i class="material-icons">info</i>
 						</h2>
 						<h5 class="center">알려 드립니다</h5>
-
-						<p class="light">간략한 공지사항 1</p>
+						<!-- <p class="light">간략한 공지사항 1</p> -->
 					</div>
 				</div>
 
@@ -154,8 +153,6 @@
 							<i class="material-icons">error</i>
 						</h2>
 						<h5 class="center">긴급 공지입니다</h5>
-
-						<p class="light">간략한 공지사항 2</p>
 					</div>
 				</div>
 
@@ -165,8 +162,6 @@
 							<i class="material-icons">stars</i>
 						</h2>
 						<h5 class="center">중요 사항입니다</h5>
-
-						<p class="light">간략한 공지사항 1</p>
 					</div>
 				</div>
 			</div>
@@ -193,7 +188,7 @@
 					url : '/blog/logout',
 					type : 'GET',
 					success : function(result){
-						alert("로그아웃에 성공하였습니다.");
+						alert(result);
 						location.href='/blog';
 					},
 					error : function(error){

@@ -2,3 +2,5 @@
 .project
 .settings/
 target/
+src/main/java/com/encar/blog/dao/AuthDao.java
+src/main/java/com/encar/blog/dao/MemberDao.java
