@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.encar.blog.domain.Auth;
+import com.encar.blog.domain.CmMap;
 import com.encar.blog.mapper.AuthMapper;
 
 @Service
@@ -20,7 +20,7 @@ public class AuthService implements AuthMapper {
 
 	@Transactional(readOnly=true)
 	@Override
-	public Auth selectAuthByAuthName(String authority) {
+	public CmMap selectAuthByAuthName(String authority) {
 		logger.info("조회대상 권한 : " + authority);
 		return authMapper.selectAuthByAuthName(authority);
 	}

@@ -13,7 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-import com.encar.blog.domain.Member;
+import com.encar.blog.domain.CmMap;
 import com.encar.blog.mapper.MemberMapper;
 
 public class LoginSuccessHandler implements AuthenticationSuccessHandler {
@@ -30,11 +30,11 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
 		req.getSession().setMaxInactiveInterval(60 * 60);
 		
-		Member member = memberMapper.selectMemberByAccount(req.getParameter("account"));
+		CmMap member = memberMapper.selectMemberByAccount(req.getParameter("account"));
 		
-		SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(member, null, member.getAuthories()));
+		SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(member, null, member.getList("authories")));
 		
-		logger.info("인증 유저의 권한 정보 : " + member);
+		logger.info("인증 유저의 권한 정보 : " + member.getList("authories"));
 		
 		res.sendRedirect("/blog");
 	}

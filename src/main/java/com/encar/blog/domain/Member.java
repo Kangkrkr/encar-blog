@@ -16,7 +16,7 @@ public class Member implements Serializable {
 	private String password;
 	private String email;
 	private String profilePic;
-	private List<Auth> authories = new ArrayList<>();
+	private List<CmMap> authories = new ArrayList<>();
 
 	public Member() {}
 
@@ -60,11 +60,11 @@ public class Member implements Serializable {
 		this.profilePic = profilePic;
 	}
 
-	public List<Auth> getAuthories() {
+	public List<CmMap> getAuthories() {
 		return authories;
 	}
 
-	public void setAuthories(List<Auth> authories) {
+	public void setAuthories(List<CmMap> authories) {
 		this.authories = authories;
 	}
 

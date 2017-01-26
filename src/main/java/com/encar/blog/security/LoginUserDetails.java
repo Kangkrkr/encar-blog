@@ -2,24 +2,24 @@ package com.encar.blog.security;
 
 import org.springframework.security.core.userdetails.User;
 
-import com.encar.blog.domain.Member;
+import com.encar.blog.domain.CmMap;
 
 public class LoginUserDetails extends User {
 
 	private static final long serialVersionUID = 1L;
 	
-	private Member member = null;
+	private CmMap member = null;
 	
-	public LoginUserDetails(Member member) {
-		super(member.getAccount(), member.getPassword(), member.getAuthories());
+	public LoginUserDetails(CmMap member) {
+		super(member.getString("account"), member.getString("password"), member.getList("authories"));
 		this.member = member;
 	}
  
-	public Member getMember() {
+	public CmMap getMember() {
 		return member;
 	}
 
-	public void setMember(Member member) {
+	public void setMember(CmMap member) {
 		this.member = member;
 	}
 	

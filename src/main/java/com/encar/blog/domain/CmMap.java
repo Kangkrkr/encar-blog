@@ -4,17 +4,25 @@ import java.io.Reader;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import oracle.sql.CLOB;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.core.GrantedAuthority;
+
 @SuppressWarnings({ "unchecked", "rawtypes" })
-public class CmMap<K, V> implements Map, Serializable {
+public class CmMap<K, V> implements Map, Serializable, GrantedAuthority {
 
 	private static final long serialVersionUID = 1L;
+	private static final Logger logger = LoggerFactory.getLogger(CmMap.class);
 
 	private HashMap map;
+	
+	private String authority;
 
 	public CmMap() {
 		map = new HashMap();
@@ -75,13 +83,26 @@ public class CmMap<K, V> implements Map, Serializable {
 		if (map.get(key) == null)
 			return null;
 		if (!map.get(key).getClass().isArray()) {
+			
+			logger.info("isArray : true");
+			
 			String[] result = { "" };
 			result[0] = (String) map.get(key);
+			
 			return result;
 		}
 		return (String[]) map.get(key);
 	}
-
+	
+	public List<CmMap> getList(String key) {
+		if (map.get(key) == null)
+			return null;
+		if (!map.get(key).getClass().isArray()) {
+			return (List<CmMap>) map.get(key);
+		}
+		return (List<CmMap>) map.get(key);
+	}
+	
 	@Override
 	public boolean isEmpty() {
 		return map.isEmpty();
@@ -183,6 +204,15 @@ public class CmMap<K, V> implements Map, Serializable {
 
 	public double getDouble(String key) {
 		return Double.parseDouble(String.valueOf(map.get(key)));
+	}
+
+	@Override
+	public String getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(String authority) {
+		this.authority = authority;
 	}
 
 }

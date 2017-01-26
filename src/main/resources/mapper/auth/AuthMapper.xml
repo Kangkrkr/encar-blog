@@ -2,14 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.encar.blog.mapper.AuthMapper">
 	
-	<resultMap type="Auth" id="authMap">
-		<id property="authId" column="AUTH_ID"/>
-		<result property="authority" column="AUTH_NAME"/>
-	</resultMap>
-	
-	<select id="selectAuthByAuthName" parameterType="String" resultMap="authMap">
-		SELECT *
-		FROM AUTH
+	<select id="selectAuthByAuthName" parameterType="String" resultType="CmMap">
+		SELECT
+			A.AUTH_NAME
+		FROM AUTH A
 		WHERE AUTH_NAME = #{authority}
 	</select>
 </mapper>

@@ -16,5 +16,6 @@
 		<typeAlias alias="int"		type="java.lang.Integer" />
 		<typeAlias alias="long"		type="java.lang.Long" />
 		<typeAlias alias="string"	type="java.lang.String"  />
+		<typeAlias alias="grantedAuth" 	type="org.springframework.security.core.GrantedAuthority"/>
 	</typeAliases>
 </configuration>

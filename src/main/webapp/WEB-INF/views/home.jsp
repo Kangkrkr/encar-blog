@@ -188,7 +188,7 @@
 					url : '/blog/logout',
 					type : 'GET',
 					success : function(result){
-						alert(result);
+						alert("로그아웃에 성공하였습니다.");
 						location.href='/blog';
 					},
 					error : function(error){
