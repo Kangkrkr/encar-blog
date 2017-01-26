@@ -1,7 +1,6 @@
 package com.encar.blog.handler;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +13,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-import com.encar.blog.domain.Auth;
 import com.encar.blog.domain.Member;
 import com.encar.blog.mapper.MemberMapper;
 
@@ -33,16 +31,10 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		req.getSession().setMaxInactiveInterval(60 * 60);
 		
 		Member member = memberMapper.selectMemberByAccount(req.getParameter("account"));
-		List<Auth> authories = memberMapper.selectAuthListByMemberId(member.getMemberId());
-		logger.info("authories : " + authories);
-		// 사용자 권한 임시 추가 (곧 제거될 코드임)
-		
-		member.setAuthories(authories);
 		
 		SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(member, null, member.getAuthories()));
 		
-		logger.info("account : " + req.getParameter("account") +" 가 인증에 성공하였습니다.");
-		logger.info("해당 유저의 권한 목록 : " + member.getAuthories());
+		logger.info("인증 유저의 권한 정보 : " + member);
 		
 		res.sendRedirect("/blog");
 	}

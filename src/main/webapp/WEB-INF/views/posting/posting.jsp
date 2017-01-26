@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -162,23 +163,25 @@
 			</div>
 		</div>
 
-		<div class="fixed-action-btn horizontal click-to-toggle">
-			<a class="btn-floating btn-large red">
-				<i class="material-icons">menu</i>
-			</a>
-			<ul>
-				<li>
-					<a class="btn-floating btn-medium red tooltipped dropdown-button" data-activates='post-subject-list' data-position="top" data-delay="50" data-tooltip="글쓰기">
-						<i class="material-icons">note_add</i>
-					</a>
-				</li>
-				<li>
-					<a class="btn-floating btn-medium yellow darken-1 tooltipped" data-position="top" data-delay="50" data-tooltip="설정">
-						<i class="material-icons">settings</i>
-					</a>
-				</li>
-			</ul>
-		</div>
+		<sec:authorize access="hasAnyRole('ADMIN', 'SUPER_USER')">
+			<div class="fixed-action-btn horizontal click-to-toggle">
+				<a class="btn-floating btn-large red">
+					<i class="material-icons">menu</i>
+				</a>
+				<ul>
+					<li>
+						<a class="btn-floating btn-medium red tooltipped dropdown-button" data-activates='post-subject-list' data-position="top" data-delay="50" data-tooltip="글쓰기">
+							<i class="material-icons">note_add</i>
+						</a>
+					</li>
+					<li>
+						<a class="btn-floating btn-medium yellow darken-1 tooltipped" data-position="top" data-delay="50" data-tooltip="설정">
+							<i class="material-icons">settings</i>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</sec:authorize>
 
 		<ul id='post-subject-list' class='dropdown-content'>
 			<li><a href="/blog/posting/add-posting">첫번째 주제</a></li>

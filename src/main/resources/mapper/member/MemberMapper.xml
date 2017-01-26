@@ -21,7 +21,14 @@
 	</select>
 	
 	<select id="selectMemberByAccount" parameterType="java.lang.String" resultMap="memberWithAuthsMap">
-		SELECT * FROM MEMBER WHERE ACCOUNT = #{account}
+		SELECT 
+			M.MEMBER_ID,
+			M.ACCOUNT,
+			M.PASSWORD,
+			M.EMAIL,
+			M.PROFILE_PIC
+		FROM MEMBER M
+		WHERE ACCOUNT = #{account}
 	</select>
 	
 	<resultMap type="Auth" id="authMap">

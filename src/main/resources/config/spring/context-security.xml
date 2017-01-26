@@ -16,9 +16,7 @@
 		<property name="memberMapper" ref="memberService"/>
 	</bean>
 	
-	<bean id="logoutSuccessHandler" class="com.encar.blog.handler.LogoutSuccessHandler">
-		<property name="memberMapper" ref="memberService"/>
-	</bean>
+	<bean id="logoutSuccessHandler" class="com.encar.blog.handler.LogoutSuccessHandler"/>
 	
 	<security:http pattern="/**/*.js" security="none" />
 	<security:http pattern="/**/*.css" security="none" />
@@ -43,7 +41,7 @@
 		<security:logout
 			logout-url="/logout"
 			invalidate-session="true"
-			success-handler-ref="logoutSuccessHandler";
+			success-handler-ref="logoutSuccessHandler"
 		/>
 		
 		<security:http-basic/>

@@ -12,13 +12,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
 
 import com.encar.blog.domain.Member;
-import com.encar.blog.mapper.MemberMapper;
 
 public class LogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {
 
 	private static Logger logger = LoggerFactory.getLogger(LogoutSuccessHandler.class);
-	
-	private MemberMapper memberMapper;
 	
 
 	@Override
@@ -37,10 +34,6 @@ public class LogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {
 			
 			response.getOutputStream().write("로그아웃에 실패하였습니다.".getBytes("UTF-8"));
 		}
-	}
-
-	public void setMemberMapper(MemberMapper memberMapper) {
-		this.memberMapper = memberMapper;
 	}
 	
 }

@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.encar.blog.domain.Member;
 import com.encar.blog.security.SecurityPrincipalProvider;
+import com.encar.blog.service.PostService;
 
 @Controller
 @RequestMapping(value="/posting")
@@ -24,6 +25,9 @@ public class PostController {
 	
 	@Autowired
 	private SecurityPrincipalProvider principalProvider;
+	
+	@Autowired
+	private PostService postService;
 	
 	@RequestMapping(value="/add-posting")
 	public String addPosting(){
@@ -36,6 +40,7 @@ public class PostController {
 		Member authorizedMember = principalProvider.getMember();
 		
 		logger.info("member info : " + authorizedMember.toString());
+		logger.info("item list : " + postService.sortItems(req));
 		
 		return new ResponseEntity<String>("포스팅 업로드에 성공하였습니다.", HttpStatus.OK);
 	}
