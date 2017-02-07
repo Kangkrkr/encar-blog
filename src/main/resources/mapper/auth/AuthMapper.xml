@@ -4,7 +4,7 @@
 	
 	<select id="selectAuthByAuthName" parameterType="String" resultType="CmMap">
 		SELECT
-			A.AUTH_NAME
+			A.AUTH_ID
 		FROM AUTH A
 		WHERE AUTH_NAME = #{authority}
 	</select>

@@ -98,7 +98,7 @@ function getThumbnailPrivew(html) {
 			$($preview).append(
 					'<img class="col s4 offset-s3 m4 offset-m4 l4 offset-l4 image-preview" src="'
 							+ e.target.result
-							+ '" border="0" width="235" height="235" alt="" />');
+							+ '" border="0" width="235" height="320" alt="" />');
 			$('.item-container').append($preview);
 		}
 		reader.readAsDataURL(html.files[0]);
@@ -106,11 +106,17 @@ function getThumbnailPrivew(html) {
 };
 
 function uploadFile() {
+
+	var pathname = location.pathname;
+	var subject = decodeURIComponent(pathname.substr(pathname.lastIndexOf('/') + 1));
+	// decodeURI 와 decodeURIComponent 는 뭔차이지 ..
+	// 아무튼 subject 추가할때 '?' 를 포함한 특수문자는 못쓰게 해야할듯..
+	
 	var form = $('#post-form')[0];
 	var formData = new FormData(form);
 
 	$.ajax({
-		url : '/blog/posting/upload',
+		url : '/blog/posting/upload/' + subject,
 		type : 'POST',
 		processData : false,
 		contentType : false,

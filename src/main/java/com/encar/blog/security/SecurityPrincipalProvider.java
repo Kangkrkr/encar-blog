@@ -4,20 +4,20 @@ import org.springframework.security.authentication.AuthenticationServiceExceptio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import com.encar.blog.domain.Member;
+import com.encar.blog.domain.CmMap;
 
 public class SecurityPrincipalProvider {
 	
-	private Member member = null;
+	private CmMap authorizedMember = null;
 	
-	public Member getMember(){
+	public CmMap getAuthorizedMember(){
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		
 		if(null == auth)
 			throw new AuthenticationServiceException("인증되지 않은 사용자입니다.");
 		else
-			member = (Member)auth.getPrincipal();
+			authorizedMember = (CmMap)auth.getPrincipal();
 		
-		return member;
+		return authorizedMember;
 	}
 }

@@ -27,7 +27,8 @@
 		<security:intercept-url pattern="/login" access="permitAll" />
 		<security:intercept-url pattern="/join" access="permitAll" />
 		<security:intercept-url pattern="/posting" access="permitAll" />
-		<security:intercept-url pattern="/posting/add-posting" access="hasAnyRole('ADMIN','SUPER_USER')" />
+		<security:intercept-url pattern="/posting/add-posting/*" access="hasAnyRole('ADMIN','SUPER_USER')" />
+		<security:intercept-url pattern="/posting/upload/*" access="hasAnyRole('ADMIN','SUPER_USER')" />
  
 		<security:form-login 
 			login-page="/login"

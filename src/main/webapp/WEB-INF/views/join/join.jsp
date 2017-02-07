@@ -22,7 +22,7 @@
 			<div class="col s12">
 				<div class="z-depth-4 grey lighten-4 row" style="display: inline-block; padding: 32px 80px 20px 80px; border: 1px solid #EEE;">
 					<h3 class="red-text text-darken1">회원가입</h3>
-					<form class="col s12" name="joinForm" id="joinForm" action="/blog/join/join-process" method="post" enctype="multipart/form-data">
+					<form class="col s12" name="joinForm" id="joinForm" mo action="/blog/join/join-process" method="post" enctype="multipart/form-data">
 						<div class='row'>
 							<div class='col s12'></div>
 						</div>
@@ -54,10 +54,11 @@
 
 						<div class="file-field col s12 tooltipped" data-position="top" data-delay="50" data-tooltip="프로필사진을 설정해주세요.">
 							<div class="btn red darken-1 z-depth-3" style="margin-left: -15px;">
-								<span>File</span><input type="file">
+								<span>File</span>
+								<input type="file" id="profilePic" name="profilePic"/>
 							</div>
 							<div class="file-path-wrapper">
-								<input class="file-path validate" type="text" id="profilePic" name="profilePic"/>
+								<input class="file-path validate" type="text"/>
 							</div>
 						</div>
 
@@ -110,10 +111,15 @@
 					return;
 				}
 
+				var form = $('#joinForm')[0];
+				var formData = new FormData(form);
+				
 				$.ajax({
 					url : '/blog/join/join-process',
 					type : 'POST',
-					data : $('#joinForm').serialize(),
+					data : formData,
+					processData : false,
+					contentType : false,
 					success : function(result){
 						alert(result);
 						location.href="/blog";

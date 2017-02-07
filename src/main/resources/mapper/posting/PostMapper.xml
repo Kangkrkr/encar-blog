@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.encar.blog.mapper.PostMapper">
+	
+	<insert id="insertPosting" parameterType="CmMap">
+		INSERT INTO POSTING(POSTING_ID, SUBJECT_ID, REG_DATE, POSTER, LIKE_COUNT, TITLE)
+		VALUES (
+			POSTING_SEQ.NEXTVAL,
+			#{subjectId},
+			SYSDATE,
+			#{poster},
+			#{likeCount},
+			#{title}
+		)
+		
+		<selectKey keyProperty="POSTING_ID" resultType="long" order="AFTER">
+			SELECT POSTING_SEQ.CURRVAL FROM DUAL
+		</selectKey>
+	</insert>
+	
+	<select id="selectPostingBySubject" parameterType="string" resultType="CmMap">
+		
+	</select>
+	
+</mapper>

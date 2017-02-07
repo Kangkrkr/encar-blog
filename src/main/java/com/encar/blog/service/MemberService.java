@@ -43,7 +43,7 @@ public class MemberService implements MemberMapper {
 		
 		CmMap params = new CmMap();
 		params.put("memberId", member.getLong("memberId"));
-		params.put("authId", userAuth.getLong("authId"));
+		params.put("authId", userAuth.getLong("AUTH_ID"));
 		
 		insertMemberAuth(params);
 		// logger.info("After Insert memberId : " + member.getMemberId()); (매퍼 xml에서 member 객체에시퀀스가 삽입된 후.)

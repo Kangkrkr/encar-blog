@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html>
 <html>
@@ -9,10 +10,9 @@
 <body>
 	<ul id="slide-out" class="posting side-nav">
 		<hr class="divider"/>
-		<li><a href="#!">첫번째 주제</a></li>
-		<li><a href="#!">두번째 주제</a></li>
-		<li><a href="#!">세번째 주제</a></li>
-		<li><a href="#!">네번째 주제</a></li>
+		<c:forEach items="${reqVO.subjects}" var="subject">
+			<li><a>${subject.SUBJECT_NAME}</a></li>
+		</c:forEach>
 		<hr class="divider"/>
 		<sec:authorize access="hasAnyRole('ADMIN', 'SUPER_USER')">
 			<li><a class="subheader">포스팅 방법</a></li>
@@ -23,7 +23,11 @@
 		<i class="medium material-icons">menu</i>
 	</a>
 	<script type="text/javascript">
-		$(".button-collapse").sideNav();
+		$(document).ready(function(){
+			$(".button-collapse").sideNav({
+				closeOnClick : true
+			});
+		});
 	</script>
 </body>
 </html>

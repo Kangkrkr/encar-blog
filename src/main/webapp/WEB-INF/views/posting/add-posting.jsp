@@ -12,6 +12,8 @@
 <body>
 	<!-- nav header -->
 	<c:import url="./../common/common-import-header.jsp"/>
+
+	<h5 class="row">${reqVO.subject}</h5>	
 	
 	<div class="col s10 offset-s1 post-container">
 		<div class="row valign center-align">

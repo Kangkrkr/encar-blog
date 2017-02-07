@@ -22,14 +22,13 @@
 						<c:import url="../common/common-import-posting-sidenav.jsp"/>
 					</div>
 					<div class="col s8 posting-title-header">
-						<h3 class="row align-left left-align">첫번째 주제</h3>					
+						<h3 class="row align-left left-align">첫번째 주제</h3>
 					</div>
 				</div>
 				<div class="row"></div>
 				<hr class="col s12 title-division"/>
 			</div>
 			
-			<!--   Icon Section   -->
 			<div class="row posting-section">
 				<div class="card col s3 offset-s1">
 					<div class="card-image waves-effect waves-block waves-light">
@@ -184,11 +183,9 @@
 		</sec:authorize>
 
 		<ul id='post-subject-list' class='dropdown-content'>
-			<li><a href="/blog/posting/add-posting">첫번째 주제</a></li>
-			<li><a href="#!">두번째 주제</a></li>
-			<li><a href="#!">세번째 주제</a></li>
-			<li><a href="#!">네번째 주제</a></li>
-			<li><a href="#!">다섯번째 주제</a></li>
+			<c:forEach items="${reqVO.subjects}" var="subject">
+				<li><a>${subject.SUBJECT_NAME}</a></li>
+			</c:forEach>
 		</ul>
 	</div>
 	
@@ -204,6 +201,31 @@
 			gutter : 0, // Spacing from edge
 			belowOrigin : false, // Displays dropdown below the button
 			alignment : 'left' // Displays dropdown with edge aligned to the left of button
+		});
+		
+		$('#slide-out li').find('a').click(function(){
+			
+			var clickedSubject = $(this).text();
+			
+			$('.posting-title-header').find('h3').text(clickedSubject);
+			$.ajax({
+				url : '/blog/posting/' + clickedSubject,
+				type : 'GET',
+				success : function(result){
+					console.log(result.posts.length);
+				},
+				error : function(err){
+					console.log(err);
+				}
+			});
+			// ajax 통신으로 동적으로 주제에 따른 포스팅 추가를 해야할듯.
+		});
+		
+		$('#post-subject-list li a').click(function(e){
+			
+			var subject = $(this).text();
+			
+			location.href='/blog/posting/add-posting/' + subject;
 		});
 	</script>
 </body>

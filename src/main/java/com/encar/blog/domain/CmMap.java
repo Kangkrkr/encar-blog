@@ -83,9 +83,6 @@ public class CmMap<K, V> implements Map, Serializable, GrantedAuthority {
 		if (map.get(key) == null)
 			return null;
 		if (!map.get(key).getClass().isArray()) {
-			
-			logger.info("isArray : true");
-			
 			String[] result = { "" };
 			result[0] = (String) map.get(key);
 			
@@ -94,6 +91,7 @@ public class CmMap<K, V> implements Map, Serializable, GrantedAuthority {
 		return (String[]) map.get(key);
 	}
 	
+	/* developed by kang */
 	public List<CmMap> getList(String key) {
 		if (map.get(key) == null)
 			return null;
@@ -208,11 +206,16 @@ public class CmMap<K, V> implements Map, Serializable, GrantedAuthority {
 
 	@Override
 	public String getAuthority() {
-		return authority;
+		return this.getString("AUTH_NAME");
 	}
 
 	public void setAuthority(String authority) {
 		this.authority = authority;
 	}
 
+	@Override
+	public String toString() {
+		return "CmMap [map=" + map +", authority : " + this.getAuthority() + "]";
+	}
+	
 }

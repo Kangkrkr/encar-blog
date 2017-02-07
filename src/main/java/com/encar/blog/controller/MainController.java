@@ -4,10 +4,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.encar.blog.domain.CmMap;
 import com.encar.blog.mapper.MemberMapper;
+import com.encar.blog.mapper.SubjectMapper;
 
 @Controller
 public class MainController {
@@ -16,6 +19,11 @@ public class MainController {
 	
 	@Autowired
 	private MemberMapper memberMapper;
+	
+	@Autowired
+	private SubjectMapper subjectMapper;
+	
+	
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
@@ -33,7 +41,10 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = "/posting", method = RequestMethod.GET)
-	public String posting() {
+	public String posting(@ModelAttribute("reqVO") CmMap reqVO) {
+		
+		reqVO.put("subjects", subjectMapper.selectSubjectName());
+		
 		return "posting/posting";
 	}
 	

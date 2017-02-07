@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.encar.blog.mapper.SubjectMapper">
+	
+	<select id="selectSubjectIdByName" parameterType="string" resultType="long">
+		SELECT S.SUBJECT_ID
+		FROM SUBJECT S
+		WHERE SUBJECT_NAME = #{subjectName}
+	</select>
+	
+	<select id="selectSubjectName" resultType="CmMap">
+		SELECT S.SUBJECT_NAME
+		FROM SUBJECT S
+	</select>
+	
+	<!-- 여기 수정 -->
+	<resultMap type="CmMap" id="subjectMap">
+		<id property="subjectId" column="SUBJECT_ID"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="subjectName" column="SUBJECT_NAME"/>
+		<collection property="posts"
+					column="SUBJECT_ID" 
+					javaType="java.util.ArrayList" 
+					ofType="CmMap"
+					select="selectPostsBySubjectId">
+		</collection>
+	</resultMap>
+	
+	<select id="selectPostsBySubjectId" parameterType="java.lang.Long" resultType="CmMap">
+		SELECT 
+			*
+		FROM POSTING P
+		WHERE P.SUBJECT_ID = #{subjectId}
+	</select>
+	
+	<select id="selectSubject" parameterType="java.lang.String" resultMap="subjectMap">
+		SELECT 
+			*
+		FROM SUBJECT
+		WHERE SUBJECT_NAME = #{subjectName}
+	</select>
+	
+</mapper>
